@@ -67,6 +67,8 @@ void saveOnFileClientes(stCliente clientes[], int validos);
 
 int loadFromFileClientes(stCliente clientes[]);
 
+int getLastId(stCliente clientes[], int validos);
+
 
 
 

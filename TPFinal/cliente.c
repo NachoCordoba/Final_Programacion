@@ -9,9 +9,6 @@
 **/
 stCliente createCliente(int nroCliente, char nombre[MAX_SIZE], char apellido[MAX_SIZE], int dni, char email[MAX_SIZE], char domicilio[MAX_SIZE], int movil){
     stCliente cliente;
-
-    /** BUSQUEDA ULTIMO ID **/
-
     cliente.id = 0;
     cliente.nroCliente = nroCliente;
     strcpy(cliente.nombre, nombre);
@@ -29,7 +26,7 @@ stCliente createCliente(int nroCliente, char nombre[MAX_SIZE], char apellido[MAX
     Agrega un Cliente a la Lista
 **/
 int addCliente(stCliente clientes[], int validos, stCliente cliente){
-
+    cliente.id = getLastId(clientes, validos);
     clientes[validos] = cliente;
     validos = validos + 1;
 
@@ -271,4 +268,15 @@ int loadFromFileClientes(stCliente clientes[]){
     }
 
     return validos;
+}
+
+int getLastId(stCliente clientes[], int validos){
+    int i = 0, lastId = 0;
+    while(i < validos){
+        if(lastId <= clientes[i].id){
+            lastId = clientes[i].id + 1;
+        }
+        i++;
+    }
+    return lastId;
 }
