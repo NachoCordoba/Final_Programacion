@@ -7,6 +7,7 @@ void mainMenu(){
     help();
 
     printf(" 1.- Clientes \n");
+    printf(" 2.- Consumos \n");
 }
 
 void help(){
@@ -17,16 +18,30 @@ void subHelp(){
     printf("\n 9.- Volver. ");
 }
 
-void subHelpClienteController(stCliente clientes[], int validosClientes){
+void subHelpClienteController(stCliente clientes[], int validosClientes, stConsumo consumos[], int validosConsumos){
     help();
     subHelp();
     switch(selectedOption()){
         case 9:
-           subMenuClientController(clientes, validosClientes);
+           subMenuClientController(clientes, validosClientes, consumos, validosConsumos);
            break;
         default:
             invalidOption();
-            subHelpClienteController(clientes, validosClientes);
+            subHelpClienteController(clientes, validosClientes, consumos, validosConsumos);
+            break;
+    }
+}
+
+void subHelpConsumoController(stCliente clientes[], int validosClientes, stConsumo consumos[], int validosConsumos){
+    help();
+    subHelp();
+    switch(selectedOption()){
+        case 9:
+           subMenuConsumoController(clientes, validosClientes, consumos, validosConsumos);
+           break;
+        default:
+            invalidOption();
+            subHelpClienteController(clientes, validosClientes, consumos, validosConsumos);
             break;
     }
 }
@@ -51,6 +66,18 @@ void subMenuClient(){
     help();
 }
 
+void subMenuConsumo(){
+    printf("//------- SECCION DE CONSUMOS -------//\n");
+    printf(" 1.- Agregar un nuevo Consumo. \n");
+    printf(" 2.- Modificar un Consumo. \n");
+    printf(" 3.- Dar de Baja un Consumo. \n");
+    printf(" 4.- Buscar un Consumo. \n");
+    printf(" 5.- Listar todos los Consumos. \n");
+    printf(" 9.- Volver \n");
+
+    help();
+}
+
 int selectedOption(){
     int option;
 
@@ -61,24 +88,27 @@ int selectedOption(){
 }
 
 
-void mainController(stCliente clientes[], int validosClientes){
+void mainController(stCliente clientes[], int validosClientes, stConsumo consumos[], int validosConsumos){
     clearScreen();
     mainMenu();
 
     switch(selectedOption()){
         case 1:
-            subMenuClientController(clientes, validosClientes);
+            subMenuClientController(clientes, validosClientes, consumos, validosConsumos);
+            break;
+        case 2:
+            subMenuConsumoController(clientes, validosClientes, consumos, validosConsumos);
             break;
         default:
             invalidOption();
             sleep(3);
-            mainController(clientes, validosClientes);
+            mainController(clientes, validosClientes, consumos, validosConsumos);
             break;
     }
 }
 
 
-void subMenuClientController(stCliente clientes[], int validosClientes){
+void subMenuClientController(stCliente clientes[], int validosClientes, stConsumo consumos[], int validosConsumos){
     clearScreen();
     subMenuClient();
 
@@ -102,7 +132,7 @@ void subMenuClientController(stCliente clientes[], int validosClientes){
             viewClientList(clientes, validosClientes);
             break;
         case 9:
-            mainController(clientes, validosClientes);
+            mainController(clientes, validosClientes, consumos, validosConsumos);
             break;
         default:
             invalidOption();
@@ -110,7 +140,42 @@ void subMenuClientController(stCliente clientes[], int validosClientes){
             break;
     }
 
-    subHelpClienteController(clientes, validosClientes);
+    subHelpClienteController(clientes, validosClientes, consumos, validosConsumos);
+}
+
+void subMenuConsumoController(stCliente clientes[], int validosClientes, stConsumo consumos[], int validosConsumos){
+    clearScreen();
+    subMenuConsumo();
+
+    switch(selectedOption()){
+        case 1:
+            validosConsumos = addConsumo(consumos, validosConsumos, getParamsConsumo());
+            saveOnFileConsumo(consumos, validosConsumos);
+            break;
+        case 2:
+            findConsumoController(consumos, validosConsumos, 1);
+            saveOnFileConsumo(consumos, validosConsumos);
+            break;
+        case 3:
+            findConsumoController(consumos, validosConsumos, 2);
+            saveOnFileConsumo(consumos, validosConsumos);
+            break;
+        case 4:
+            findConsumoController(consumos, validosConsumos, 0);
+            break;
+        case 5:
+            viewConsumoList(consumos, validosConsumos);
+            break;
+        case 9:
+            mainController(clientes, validosClientes, consumos, validosConsumos);
+            break;
+        default:
+            invalidOption();
+            sleep(3);
+            break;
+    }
+
+    subHelpConsumoController(clientes, validosClientes, consumos, validosConsumos);
 }
 
 void findClientOptions(){
@@ -119,6 +184,14 @@ void findClientOptions(){
     printf("\n 2.- Buscar por Numero de Cliente.");
     printf("\n 3.- Buscar por Apellido.");
     printf("\n 4.- Buscar por DNI.");
+    printf("\n 9.- Volver.");
+}
+
+void findConsumoOptions(){
+    printf("\n //-- Busqueda de Consumo --//");
+    printf("\n 1.- Buscar por ID.");
+    printf("\n 2.- Buscar por Fecha.");
+    printf("\n 3.- Buscar por Cliente.");
     printf("\n 9.- Volver.");
 }
 
@@ -171,11 +244,59 @@ void findClientController(stCliente clientes[], int validosClientes, int option)
             viewClient(*cliente);
             break;
         case 9:
-            subMenuClientController(clientes, validosClientes);
+            //subMenuClientController(clientes, validosClientes, consumos, validosCo);
             break;
     }
-    subHelpClienteController(clientes, validosClientes);
+    //subHelpClienteController(clientes, validosClientes);
     //subMenuClientController(clientes, validosClientes);
+}
+
+void findConsumoController(stConsumo consumos[], int validosConsumos, int option){
+    clearScreen();
+    findConsumoOptions();
+    int number, number2, number3;
+    stConsumo * consumo;
+
+    switch(selectedOption()){
+        case 1:
+            printf("\n Ingrese el ID:");
+            scanf("%d", &number);
+            consumo = findConsumoById(consumos, validosConsumos, number);
+            if(option == 1)
+                modifyConsumoController(consumo);
+            if(option == 2)
+                unsubscribeConsumo(consumo);
+            viewConsumo(*consumo);
+            break;
+        case 2:
+            printf("\n Ingrese el anio: ");
+            scanf("%s", number);
+            printf("\n Ingrese el mes: ");
+            scanf("%s", number2);
+            printf("\n Ingrese el dia: ");
+            scanf("%s", number3);
+            consumo = findConsumoByFecha(consumos, validosConsumos, number, number2, number3);
+            if(option == 1)
+                modifyConsumoController(consumo);
+            if(option == 2)
+                unsubscribeConsumo(consumo);
+            viewConsumo(*consumo);
+            break;
+        case 3:
+            printf("\n Ingrese el Numero del Cliente:");
+            scanf("%d", &number);
+            consumo = findConsumoByCliente(consumos, validosConsumos, number);
+            if(option == 1)
+                modifyConsumoController(consumo);
+            if(option == 2)
+                unsubscribeConsumo(consumo);
+            viewConsumo(*consumo);
+            break;
+        case 9:
+            //subMenuConsumoController(consumos, validosConsumos);
+            break;
+    }
+    //subHelpConsumoController(consumos, validosConsumos);
 }
 
 void modifyClienteOptions(){
@@ -188,6 +309,16 @@ void modifyClienteOptions(){
     printf("\n 6.- Modificar Domicilio.");
     printf("\n 7.- Modificar Movil.");
     printf("\n 8.- Habilitar.");
+}
+
+void modifyConsumoOptions(){
+    printf("\n //----- MODIFICA CONSUMO -----//");
+    printf("\n 1.- Modificar el ID del Cliente.");
+    printf("\n 2.- Modificar Anio.");
+    printf("\n 3.- Modificar Mes.");
+    printf("\n 4.- Modificar Dia.");
+    printf("\n 5.- Modificar Datos Consumidos.");
+    printf("\n 6.- Habilitar.");
 }
 
 stCliente modifyClientController(stCliente * cliente){
@@ -238,6 +369,47 @@ stCliente modifyClientController(stCliente * cliente){
             break;
         case 8:
             modifyClient(cliente,intValue,charValue,8);
+            break;
+    }
+}
+
+stConsumo modifyConsumoController(stConsumo * consumo){
+    clearScreen();
+    viewConsumo(*consumo);
+    modifyConsumoOptions();
+    subHelp();
+    help();
+
+    int intValue;
+
+    switch(selectedOption()){
+        case 1:
+            printf("\n Seleccione el nuevo valor de ID Cliente: ");
+            scanf("%d", &intValue);
+            modifyConsumo(consumo,intValue,1);
+            break;
+        case 2:
+            printf("\n Seleccione el nuevo valor de Anio: ");
+            scanf("%d", &intValue);
+            modifyConsumo(consumo,intValue,2);
+            break;
+        case 3:
+            printf("\n Seleccione el nuevo valor de Mes: ");
+            scanf("%d", &intValue);
+            modifyConsumo(consumo,intValue,3);
+            break;
+        case 4:
+            printf("\n Seleccione el nuevo valor de Dia: ");
+            scanf("%d", &intValue);
+            modifyConsumo(consumo,intValue,4);
+            break;
+        case 5:
+            printf("\n Seleccione el nuevo valor de Datos Consumidos: ");
+            scanf("%d", &intValue);
+            modifyConsumo(consumo,intValue,5);
+            break;
+        case 6:
+            modifyConsumo(consumo,intValue,8);
             break;
     }
 }

@@ -6,7 +6,9 @@
 int main()
 {
     stCliente clientes[300];
-    int validosClientes = loadFromFile(clientes);
-    mainController(clientes, validosClientes);
+    stConsumo consumos[600];
+    int validosClientes = loadFromFileClientes(clientes);
+    int validosConsumos = loadFromFileConsumo(consumos);
+    mainController(clientes, validosClientes, consumos, validosConsumos);
     return 0;
 }

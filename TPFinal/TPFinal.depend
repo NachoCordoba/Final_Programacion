@@ -4,22 +4,30 @@
 
 1593373350 c:\users\icordoba\documents\utn\programacion\final_programacion\tpfinal\names.h
 
-1593373932 source:c:\users\icordoba\documents\utn\programacion\final_programacion\tpfinal\consumo.c
+1593787908 source:c:\users\icordoba\documents\utn\programacion\final_programacion\tpfinal\consumo.c
+	"consumo.h"
+	<stdio.h>
+	<stdlib.h>
 
-1593739395 source:c:\users\icordoba\documents\utn\programacion\final_programacion\tpfinal\cliente.c
+1593785760 source:c:\users\icordoba\documents\utn\programacion\final_programacion\tpfinal\cliente.c
 	"cliente.h"
+	<stdio.h>
+	<stdlib.h>
 
-1593737424 c:\users\icordoba\documents\utn\programacion\final_programacion\tpfinal\cliente.h
+1593785914 c:\users\icordoba\documents\utn\programacion\final_programacion\tpfinal\cliente.h
 
-1593731567 source:c:\users\icordoba\documents\utn\programacion\final_programacion\tpfinal\main.c
+1593789387 source:c:\users\icordoba\documents\utn\programacion\final_programacion\tpfinal\main.c
 	<stdio.h>
 	<stdlib.h>
 	"cliente.h"
 	"menu.h"
 
-1593739148 c:\users\icordoba\documents\utn\programacion\final_programacion\tpfinal\menu.h
+1593789885 c:\users\icordoba\documents\utn\programacion\final_programacion\tpfinal\menu.h
 	"cliente.h"
+	"consumo.h"
 
-1593739377 source:c:\users\icordoba\documents\utn\programacion\final_programacion\tpfinal\menu.c
+1593790226 source:c:\users\icordoba\documents\utn\programacion\final_programacion\tpfinal\menu.c
 	"menu.h"
+
+1593787882 c:\users\icordoba\documents\utn\programacion\final_programacion\tpfinal\consumo.h
 
