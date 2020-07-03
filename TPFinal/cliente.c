@@ -304,6 +304,6 @@ int validateNewClient(stCliente clientes[], int validos, stCliente cliente){
 }
 
 int getRandomClient(stCliente clientes[], int validos){
-    int r = rand() % validos;
+    int r = rand() % validos + 1;
     return clientes[r].id;
 }

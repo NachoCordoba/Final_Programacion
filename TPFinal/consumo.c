@@ -32,7 +32,7 @@ int addConsumo(stConsumo consumos[], int validos, stConsumo consumo){
         printf("\n Agregado Correctamente \n");
     }
     else
-        printf("\n No se agrego correctamente el cliente: Existe coincidencia en DNI o Numero Cliente \n");
+        printf("\n El Consumo existia, fueron agregados los datos Consumidos a su respectivo consumo. \n");
 
 
     return validos;
@@ -247,12 +247,14 @@ int getLastIdConsumo(stConsumo consumo[], int validos){
 int validateNewConsumo(stConsumo consumos[], int validos, stConsumo consumo){
     int flag = 1, i = 0;
 
-    /*while(i < validos){
-        if(cliente.nroCliente == clientes[i].nroCliente || cliente.dni == clientes[i].dni){
+    while(i < validos){
+        if(consumos[i].anio == consumo.anio && consumos[i].mes == consumo.mes && consumos[i].dia == consumo.dia && consumos[i].idCliente == consumo.idCliente){
             flag = 0;
+            consumos[i].datosConsumidos = consumos[i].datosConsumidos + consumo.datosConsumidos;
+            break;
         }
         i++;
-    }*/
+    }
     return flag;
 }
 
@@ -262,8 +264,10 @@ int addRandomConsumo(stConsumo consumos[], int validos, int id){
     int r = rand() % 999;
 
     int year = rand() % ((tm.tm_year + 1900) - 2000 + 1) + 2000;
+    int mes = rand() % (12 - 1 + 1) + 1;
+    int dia = rand() % (31 - 1 + 1) + 1;
 
-    stConsumo consumo = createConsumo(id, year , tm.tm_mon + 1, tm.tm_mday, r);
+    stConsumo consumo = createConsumo(id, year , mes, dia, r);
 
     return addConsumo(consumos, validos, consumo);
 }
