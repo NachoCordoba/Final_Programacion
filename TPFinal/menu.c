@@ -270,11 +270,11 @@ void findConsumoController(stConsumo consumos[], int validosConsumos, int option
             break;
         case 2:
             printf("\n Ingrese el anio: ");
-            scanf("%s", number);
+            scanf("%d", &number);
             printf("\n Ingrese el mes: ");
-            scanf("%s", number2);
+            scanf("%d", &number2);
             printf("\n Ingrese el dia: ");
-            scanf("%s", number3);
+            scanf("%d", &number3);
             consumo = findConsumoByFecha(consumos, validosConsumos, number, number2, number3);
             if(option == 1)
                 modifyConsumoController(consumo);
@@ -409,7 +409,7 @@ stConsumo modifyConsumoController(stConsumo * consumo){
             modifyConsumo(consumo,intValue,5);
             break;
         case 6:
-            modifyConsumo(consumo,intValue,8);
+            modifyConsumo(consumo,intValue,6);
             break;
     }
 }

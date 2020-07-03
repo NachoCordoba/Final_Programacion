@@ -45,7 +45,8 @@ int addCliente(stCliente clientes[], int validos, stCliente cliente){
 **/
 stCliente getParamsCliente(){
     int nroCliente, dni, movil;
-    char nombre[MAX_SIZE], apellido[MAX_SIZE], email[MAX_SIZE], domicilio[MAX_SIZE];
+    char nombre[MAX_SIZE], apellido[MAX_SIZE], email[MAX_SIZE], domicilio[30];
+    char temp;
 
     printf("\n Numero Cliente: ");
     scanf("%d", &nroCliente);
@@ -63,7 +64,9 @@ stCliente getParamsCliente(){
     scanf("%s", email);
 
     printf("\n Domicilio: ");
-    scanf("%s", domicilio);
+    scanf("%c",&temp);
+    scanf("%[^\n]",domicilio);
+    //domicilio = d;
 
     printf("\n Telefono Movil: ");
     scanf("%d", &movil);
