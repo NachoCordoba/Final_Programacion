@@ -5,7 +5,17 @@
 #define FILE_NAME "consumos.dat"
 
 /**
-    Crea un Consumo
+    Funcion: Crea un consumo
+    Descripcion: Crea la estructura de un consumo.
+
+    @param idCliente : ID del Cliente (int)
+    @param anio (char)
+    @param mes (char)
+    @param dia  (int)
+    @param datosConsumidos  (char)
+
+    @return consumo : Estructura con datos Nuevo Consumo (stConsumo)
+
 **/
 stConsumo createConsumo(int idCliente, int anio, int mes, int dia, int datosConsumidos){
     stConsumo consumo;
@@ -21,7 +31,15 @@ stConsumo createConsumo(int idCliente, int anio, int mes, int dia, int datosCons
 }
 
 /**
-    Agrega un Consumo a la Lista
+    Funcion: Agrega un consumo a la Lista
+    Descripcion: Agrega la estructura de un consumo a la lista.
+
+    @param consumos : Lista de consumos (char[])
+    @param validos : Consumos Validos de la lista(int)
+    @param consumo : Consumo a agregar (stConsumo)
+
+    @return validos : Nueva cantidad de Validos (int)
+
 **/
 int addConsumo(stConsumo consumos[], int validos, stConsumo consumo){
     consumo.id = getLastIdConsumo(consumos, validos);
@@ -39,7 +57,11 @@ int addConsumo(stConsumo consumos[], int validos, stConsumo consumo){
 }
 
 /**
-    Obtiene parametros para agregar un Consumo
+    Funcion: Parametros de Consumo
+    Descripcion: Obtiene los parametros necesarios para la creacion de un consumo.
+
+    @return consumo : Devuelve el nuevo consumo (stConsumo)
+
 **/
 stConsumo getParamsConsumo(){
     int idCliente, anio, mes, dia, datosConsumidos;
@@ -65,7 +87,11 @@ stConsumo getParamsConsumo(){
 }
 
 /**
-    Visualiza un Consumo
+    Funcion: Ver Consumo
+    Descripcion: Visualiza un consumo en cuestion.
+
+    @param consumo : Consumo a ver (stConsumo)
+
 **/
 void viewConsumo(stConsumo consumo){
     printf("\n // ------- Consumo ID: %d -------// \n", consumo.id);
@@ -77,7 +103,12 @@ void viewConsumo(stConsumo consumo){
 }
 
 /**
-    Visualiza una lista de Consumos
+    Funcion: Ver Lista Consumos
+    Descripcion: Muestra la Lista de Consumos.
+
+    @param consumos : Lista de consumos (char[])
+    @param validos : Consumos Validos de la lista(int)
+
 **/
 void viewConsumoList(stConsumo consumos[], int validos){
     printf("//------------- LISTADO DE CONSUMOS -------------// \n");
@@ -90,7 +121,13 @@ void viewConsumoList(stConsumo consumos[], int validos){
 }
 
 /**
-    Dar de Baja Consumo
+    Funcion: Baja Consumo
+    Descripcion: Da de baja un consumo, cambiando su propiedad.
+
+    @param consumo : Consumo a modificar (stConsumo)
+
+    @return consumo : Consumo Modificado (stConsumo)
+
 **/
 stConsumo unsubscribeConsumo(stConsumo * consumo){
 
@@ -99,7 +136,15 @@ stConsumo unsubscribeConsumo(stConsumo * consumo){
 }
 
 /**
-    Modifica un Consumo
+    Funcion: Modifica un Consumo.
+    Descripcion: Modifica un Consumo.
+
+    @param consumo : Consumo a Modificar (stConsumo)
+    @param intValue: Valor entero a modificar (int)
+    @param field : Campo  a modificar (int) 1-- Id cliente  2-- anio 3-- mes  4-- dia 5-- datosConsumidos 6-- habilitar
+
+    @return consumo : Consumo Modificado (stConsumo)
+
 **/
 stConsumo modifyConsumo(stConsumo * consumo, int intValue, int field){
     switch(field){
@@ -127,7 +172,15 @@ stConsumo modifyConsumo(stConsumo * consumo, int intValue, int field){
 }
 
 /**
-    Buscar Consumo
+    Funcion: Busca un Consumo por ID.
+    Descripcion: Busca un consumo en una lista por ID.
+
+    @param consumos : Lista de Consumos (char[])
+    @param validos : Consumos Validos de la lista(int)
+    @param id : id del consumo a buscar (int)
+
+    @return consumo : Consumo encontrado (stConsumo)
+
 **/
 stConsumo * findConsumoById(stConsumo consumos[], int validos, int id){
     int i = 0;
@@ -154,7 +207,19 @@ stConsumo * findConsumoById(stConsumo consumos[], int validos, int id){
     return consumoResponse;
 }
 
+/**
+    Funcion: Busca un Consumo por Fecha.
+    Descripcion: Busca un consumo en una lista por Fecha.
 
+    @param consumos : Lista de Consumos (char[])
+    @param validos : Consumos Validos de la lista(int)
+    @param anio : anio del consumo a buscar (int)
+    @param mes : mes del consumo a buscar (int)
+    @param dia : dia del consumo a buscar (int)
+
+    @return consumo : Consumo encontrado (stConsumo)
+
+**/
 stConsumo * findConsumoByFecha(stConsumo consumos[], int validos, int anio, int mes, int dia){
     int i = 0;
     int flag = 0;
@@ -180,6 +245,17 @@ stConsumo * findConsumoByFecha(stConsumo consumos[], int validos, int anio, int 
     return consumoResponse;
 }
 
+/**
+    Funcion: Busca un Consumo por Cliente.
+    Descripcion: Busca un consumo en una lista por Cliente.
+
+    @param consumos : Lista de Consumos (char[])
+    @param validos : Consumos Validos de la lista(int)
+    @param id : id cliente del consumo a buscar (int)
+
+    @return consumo : Consumo encontrado (stConsumo)
+
+**/
 stConsumo * findConsumoByCliente(stConsumo consumos[], int validos, int id){
     int i = 0;
     int flag = 0;
@@ -206,6 +282,15 @@ stConsumo * findConsumoByCliente(stConsumo consumos[], int validos, int id){
     return consumoResponse;
 }
 
+/**
+    Funcion: Guardar.
+    Descripcion: Guarda la informacion de la lista de consumos en un archivo.
+
+    @param consumos : Lista de Consumos (char[])
+    @param validos : Consumos Validos de la lista(int)
+
+
+**/
 void saveOnFileConsumo(stConsumo consumos[], int validos){
     int i = 0;
     FILE * file;
@@ -218,6 +303,16 @@ void saveOnFileConsumo(stConsumo consumos[], int validos){
     fclose(file);
 }
 
+/**
+    Funcion: Obtener Ultimo ID.
+    Descripcion: Obtiene el ultimo ID de la lista de consumos.
+
+    @param consumos : Lista de Consumos (char[])
+    @param validos : Consumos Validos de la lista (int)
+
+    @return lastId : El mayor ID encontrado (int)
+
+**/
 int loadFromFileConsumo(stConsumo consumos[]){
     int validos = 0;
     FILE * file;
@@ -233,6 +328,16 @@ int loadFromFileConsumo(stConsumo consumos[]){
     return validos;
 }
 
+/**
+    Funcion: Obtener Ultimo ID.
+    Descripcion: Obtiene el ultimo ID de la lista de consumos.
+
+    @param consumos : Lista de Consumos (char[])
+    @param validos : Consumos Validos de la lista (int)
+
+    @return lastId : El mayor ID encontrado (int)
+
+**/
 int getLastIdConsumo(stConsumo consumo[], int validos){
     int i = 0, lastId = 0;
     while(i < validos){
@@ -244,6 +349,17 @@ int getLastIdConsumo(stConsumo consumo[], int validos){
     return lastId;
 }
 
+/**
+    Funcion: Validacion Nuevo.
+    Descripcion: Valida el nuevo consumos.
+
+    @param consumos : Lista de Consumos (char[])
+    @param validos : Consumos Validos de la lista (int)
+    @param consumo : Consumo a insertar.
+
+    @return flag : Si paso o no la validacion (int) 1-- Paso.  0-- Se agrega al existente.
+
+**/
 int validateNewConsumo(stConsumo consumos[], int validos, stConsumo consumo){
     int flag = 1, i = 0;
 
@@ -258,6 +374,17 @@ int validateNewConsumo(stConsumo consumos[], int validos, stConsumo consumo){
     return flag;
 }
 
+/**
+    Funcion: Genera random.
+    Descripcion: Genera un Consumo Random a la lista.
+
+    @param consumos : Lista de Consumo (char[])
+    @param validos : Consumos Validos de la lista (int)
+    @param id : ID del cliente (int)
+
+    @return validos: validos nuevo tamaño (int)
+
+**/
 int addRandomConsumo(stConsumo consumos[], int validos, int id){
     time_t t = time(NULL);
     struct tm tm = *localtime(&t);

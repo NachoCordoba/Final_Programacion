@@ -1,5 +1,8 @@
 #include "menu.h"
 
+/**
+    MENU PRINCIPAL
+**/
 void mainMenu(){
     printf(" ¡Bienvenido! \n");
     printf(" Sistema de Clientes y Consumos. \n");
@@ -10,14 +13,23 @@ void mainMenu(){
     printf(" 2.- Consumos \n");
 }
 
+/**
+    INSTRUCCIONES
+**/
 void help(){
-    printf(" Para continuar, debe seleccionar una de las opciones mostradas en pantalla. \n");
+    printf("\n Para continuar, debe seleccionar una de las opciones mostradas en pantalla. \n");
 }
 
+/**
+    INSTRUCCION VOLVER
+**/
 void subHelp(){
     printf("\n 9.- Volver. ");
 }
 
+/**
+    CONTROLADOR DE INSTRUCCION VOLVER A CLIENTE
+**/
 void subHelpClienteController(stCliente clientes[], int validosClientes, stConsumo consumos[], int validosConsumos){
     help();
     subHelp();
@@ -32,6 +44,9 @@ void subHelpClienteController(stCliente clientes[], int validosClientes, stConsu
     }
 }
 
+/**
+    CONTROLADOR DE INSTRUCCION VOLVER A CONSUMO
+**/
 void subHelpConsumoController(stCliente clientes[], int validosClientes, stConsumo consumos[], int validosConsumos){
     help();
     subHelp();
@@ -41,19 +56,28 @@ void subHelpConsumoController(stCliente clientes[], int validosClientes, stConsu
            break;
         default:
             invalidOption();
-            subHelpClienteController(clientes, validosClientes, consumos, validosConsumos);
+            subHelpConsumoController(clientes, validosClientes, consumos, validosConsumos);
             break;
     }
 }
 
+/**
+    OPCION SELECCIONADA NO VALIDA
+**/
 void invalidOption(){
     printf(" La opcion que selecciono, no corresponde a ninguna de las anteriores. Por favor, vuelva a intentar. \n");
 }
 
+/**
+    LIMPIAR PANTALLA
+**/
 void clearScreen(){
     system("cls");
 }
 
+/**
+    SUB MENU CLIENTE
+**/
 void subMenuClient(){
     printf("//------- SECCION DE CLIENTES -------//\n");
     printf(" 1.- Agregar un nuevo Cliente. \n");
@@ -66,6 +90,9 @@ void subMenuClient(){
     help();
 }
 
+/**
+    SUB MENU CONSUMO
+**/
 void subMenuConsumo(){
     printf("//------- SECCION DE CONSUMOS -------//\n");
     printf(" 1.- Agregar un nuevo Consumo. \n");
@@ -79,6 +106,9 @@ void subMenuConsumo(){
     help();
 }
 
+/**
+    SELECCION DE OPCION POR TECLADO
+**/
 int selectedOption(){
     int option;
 
@@ -88,7 +118,9 @@ int selectedOption(){
     return option;
 }
 
-
+/**
+    CONTROLADOR DEL MENU PRINCIPAL
+**/
 void mainController(stCliente clientes[], int validosClientes, stConsumo consumos[], int validosConsumos){
     clearScreen();
     mainMenu();
@@ -108,7 +140,9 @@ void mainController(stCliente clientes[], int validosClientes, stConsumo consumo
     }
 }
 
-
+/**
+    CONTROLADOR DEL SUB MENU DE CLIENTES
+**/
 void subMenuClientController(stCliente clientes[], int validosClientes, stConsumo consumos[], int validosConsumos){
     clearScreen();
     subMenuClient();
@@ -144,6 +178,9 @@ void subMenuClientController(stCliente clientes[], int validosClientes, stConsum
     subHelpClienteController(clientes, validosClientes, consumos, validosConsumos);
 }
 
+/**
+    CONTROLADOR DEL SUB MENU DE CONSUMOS
+**/
 void subMenuConsumoController(stCliente clientes[], int validosClientes, stConsumo consumos[], int validosConsumos){
     clearScreen();
     subMenuConsumo();
@@ -188,6 +225,9 @@ void subMenuConsumoController(stCliente clientes[], int validosClientes, stConsu
     subHelpConsumoController(clientes, validosClientes, consumos, validosConsumos);
 }
 
+/**
+    OPCIONES DE BUSQUEDA DE CLIENTES
+**/
 void findClientOptions(){
     printf("\n //-- Busqueda de Cliente --//");
     printf("\n 1.- Buscar por ID.");
@@ -197,6 +237,9 @@ void findClientOptions(){
     printf("\n 9.- Volver.");
 }
 
+/**
+    OPCIONES DE BUSQUEDA DE CONSUMOS
+**/
 void findConsumoOptions(){
     printf("\n //-- Busqueda de Consumo --//");
     printf("\n 1.- Buscar por ID.");
@@ -205,6 +248,9 @@ void findConsumoOptions(){
     printf("\n 9.- Volver.");
 }
 
+/**
+    CONTROLADOR OPCIONES DE BUSQUEDA DE CLIENTES
+**/
 void findClientController(stCliente clientes[], int validosClientes, int option){
     clearScreen();
     findClientOptions();
@@ -261,6 +307,9 @@ void findClientController(stCliente clientes[], int validosClientes, int option)
     //subMenuClientController(clientes, validosClientes);
 }
 
+/**
+    CONTROLADOR DE OPCIONES DE BUSQUEDA DE CONSUMOS
+**/
 void findConsumoController(stConsumo consumos[], int validosConsumos, int option){
     clearScreen();
     findConsumoOptions();
@@ -309,6 +358,9 @@ void findConsumoController(stConsumo consumos[], int validosConsumos, int option
     //subHelpConsumoController(consumos, validosConsumos);
 }
 
+/**
+    OPCIONES DE MODIFICACION DE CLIENTES
+**/
 void modifyClienteOptions(){
     printf("\n //----- MODIFICA CLIENTE -----//");
     printf("\n 1.- Modificar Numero Cliente.");
@@ -321,6 +373,9 @@ void modifyClienteOptions(){
     printf("\n 8.- Habilitar.");
 }
 
+/**
+    OPCIONES DE MODIFICACION DE CONSUMOS
+**/
 void modifyConsumoOptions(){
     printf("\n //----- MODIFICA CONSUMO -----//");
     printf("\n 1.- Modificar el ID del Cliente.");
@@ -331,6 +386,9 @@ void modifyConsumoOptions(){
     printf("\n 6.- Habilitar.");
 }
 
+/**
+    CONTROLADOR DE OPCIONES DE MODIFICACION DE CLIENTES
+**/
 stCliente modifyClientController(stCliente * cliente){
     clearScreen();
     viewClient(*cliente);
@@ -383,6 +441,10 @@ stCliente modifyClientController(stCliente * cliente){
     }
 }
 
+
+/**
+    CONTROLADOR DE OPCIONES DE MODIFICACION DE CONSUMOS
+**/
 stConsumo modifyConsumoController(stConsumo * consumo){
     clearScreen();
     viewConsumo(*consumo);
