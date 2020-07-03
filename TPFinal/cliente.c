@@ -27,8 +27,15 @@ stCliente createCliente(int nroCliente, char nombre[MAX_SIZE], char apellido[MAX
 **/
 int addCliente(stCliente clientes[], int validos, stCliente cliente){
     cliente.id = getLastId(clientes, validos);
-    clientes[validos] = cliente;
-    validos = validos + 1;
+
+    if( validateNewClient(clientes, validos, cliente) == 1){
+        clientes[validos] = cliente;
+        validos = validos + 1;
+        printf("\n Agregado Correctamente \n");
+    }
+    else
+        printf("\n No se agrego correctamente el cliente: Existe coincidencia en DNI o Numero Cliente \n");
+
 
     return validos;
 }
@@ -248,7 +255,6 @@ void saveOnFileClientes(stCliente clientes[], int validos){
     file = fopen(FILE_NAME, "wb");
 
     while(i < validos){
-            viewClient(clientes[i]);
             fwrite(&clientes[i], sizeof(stCliente),1,file);
             i++;
     }
@@ -279,4 +285,16 @@ int getLastId(stCliente clientes[], int validos){
         i++;
     }
     return lastId;
+}
+
+int validateNewClient(stCliente clientes[], int validos, stCliente cliente){
+    int flag = 1, i = 0;
+
+    while(i < validos){
+        if(cliente.nroCliente == clientes[i].nroCliente || cliente.dni == clientes[i].dni){
+            flag = 0;
+        }
+        i++;
+    }
+    return flag;
 }
