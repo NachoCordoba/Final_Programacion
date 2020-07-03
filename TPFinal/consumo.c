@@ -24,7 +24,7 @@ stConsumo createConsumo(int idCliente, int anio, int mes, int dia, int datosCons
     Agrega un Consumo a la Lista
 **/
 int addConsumo(stConsumo consumos[], int validos, stConsumo consumo){
-    consumo.id = getLastId(consumos, validos);
+    consumo.id = getLastIdConsumo(consumos, validos);
 
     if( validateNewConsumo(consumos, validos, consumo) == 1){
         consumos[validos] = consumo;
@@ -261,9 +261,9 @@ int addRandomConsumo(stConsumo consumos[], int validos, int id){
     struct tm tm = *localtime(&t);
     int r = rand() % 999;
 
-    stConsumo consumo = createConsumo(id, tm.tm_year, tm.tm_mon, tm.tm_mday, r);
+    int year = rand() % ((tm.tm_year + 1900) - 2000 + 1) + 2000;
 
-    viewConsumo(consumo);
+    stConsumo consumo = createConsumo(id, year , tm.tm_mon + 1, tm.tm_mday, r);
 
     return addConsumo(consumos, validos, consumo);
 }
