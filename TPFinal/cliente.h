@@ -69,7 +69,7 @@ int loadFromFileClientes(stCliente clientes[]);
 
 int getLastId(stCliente clientes[], int validos);
 
-
+int validateNewClient(stCliente clientes[], int validos, stCliente cliente);
 
 
 #endif
