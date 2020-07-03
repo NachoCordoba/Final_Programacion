@@ -1,10 +1,13 @@
 #include "cliente.h"
-
+#include <stdio.h>
+#include <stdlib.h>
+#define MAX_SIZE 30
+#define FILE_NAME "clientes.dat"
 
 /**
     Crea un Cliente
 **/
-stCliente createCliente(int nroCliente, char nombre[30], char apellido[30], int dni, char email[30], char domicilio[30], int movil){
+stCliente createCliente(int nroCliente, char nombre[MAX_SIZE], char apellido[MAX_SIZE], int dni, char email[MAX_SIZE], char domicilio[MAX_SIZE], int movil){
     stCliente cliente;
 
     /** BUSQUEDA ULTIMO ID **/
@@ -28,9 +31,7 @@ stCliente createCliente(int nroCliente, char nombre[30], char apellido[30], int 
 int addCliente(stCliente clientes[], int validos, stCliente cliente){
 
     clientes[validos] = cliente;
-
     validos = validos + 1;
-    /** AÑADIR EN ARCHIVO **/
 
     return validos;
 }
@@ -40,7 +41,7 @@ int addCliente(stCliente clientes[], int validos, stCliente cliente){
 **/
 stCliente getParamsCliente(){
     int nroCliente, dni, movil;
-    char nombre[30], apellido[30], email[30], domicilio[30];
+    char nombre[MAX_SIZE], apellido[MAX_SIZE], email[MAX_SIZE], domicilio[MAX_SIZE];
 
     printf("\n Numero Cliente: ");
     scanf("%d", &nroCliente);
@@ -107,7 +108,7 @@ stCliente unsubscribeClient(stCliente * cliente){
 /**
     Modifica un Cliente
 **/
-stCliente modifyClient(stCliente * cliente, int intValue, char charValue[30], int field){
+stCliente modifyClient(stCliente * cliente, int intValue, char charValue[MAX_SIZE], int field){
     switch(field){
         case 1:
             cliente->nroCliente = intValue;
@@ -192,7 +193,7 @@ stCliente * findClientByNro(stCliente clientes[], int validos, int nroCliente){
     return clienteResponse;
 }
 
-stCliente * findClientByApellido(stCliente clientes[], int validos, char apellido[30]){
+stCliente * findClientByApellido(stCliente clientes[], int validos, char apellido[MAX_SIZE]){
     int i = 0;
     int flag = 0;
 
@@ -242,4 +243,32 @@ stCliente * findClientByDNI(stCliente clientes[], int validos, int dni){
     }
 
     return clienteResponse;
+}
+
+void saveOnFile(stCliente clientes[], int validos){
+    int i = 0;
+    FILE * file;
+    file = fopen(FILE_NAME, "wb");
+
+    while(i < validos){
+            viewClient(clientes[i]);
+            fwrite(&clientes[i], sizeof(stCliente),1,file);
+            i++;
+    }
+    fclose(file);
+}
+
+int loadFromFile(stCliente clientes[]){
+    int validos = 0;
+    FILE * file;
+    if((file = fopen(FILE_NAME, "rb"))!= NULL){
+        while(!feof(file)){
+            fread(&clientes[validos], sizeof(stCliente),1, file);
+            validos++;
+        }
+        validos--;
+        fclose(file);
+    }
+
+    return validos;
 }

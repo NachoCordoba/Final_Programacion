@@ -85,12 +85,15 @@ void subMenuClientController(stCliente clientes[], int validosClientes){
     switch(selectedOption()){
         case 1:
             validosClientes = addCliente(clientes, validosClientes, getParamsCliente());
+            saveOnFile(clientes, validosClientes);
             break;
         case 2:
             findClientController(clientes, validosClientes, 1);
+            saveOnFile(clientes, validosClientes);
             break;
         case 3:
             findClientController(clientes, validosClientes, 2);
+            saveOnFile(clientes, validosClientes);
             break;
         case 4:
             findClientController(clientes, validosClientes, 0);
