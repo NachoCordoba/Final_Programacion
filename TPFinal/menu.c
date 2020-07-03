@@ -73,6 +73,7 @@ void subMenuConsumo(){
     printf(" 3.- Dar de Baja un Consumo. \n");
     printf(" 4.- Buscar un Consumo. \n");
     printf(" 5.- Listar todos los Consumos. \n");
+    printf(" 6.- Generar Consumos Aleatorios (1000). \n");
     printf(" 9.- Volver \n");
 
     help();
@@ -147,6 +148,8 @@ void subMenuConsumoController(stCliente clientes[], int validosClientes, stConsu
     clearScreen();
     subMenuConsumo();
 
+    int i = 0;
+
     switch(selectedOption()){
         case 1:
             validosConsumos = addConsumo(consumos, validosConsumos, getParamsConsumo());
@@ -165,6 +168,13 @@ void subMenuConsumoController(stCliente clientes[], int validosClientes, stConsu
             break;
         case 5:
             viewConsumoList(consumos, validosConsumos);
+            break;
+        case 6:
+            while(i < 1000){
+                validosConsumos = addRandomConsumo(consumos, validosConsumos, getRandomClient(clientes, validosClientes));
+                i++;
+            }
+            saveOnFileConsumo(consumos, validosConsumos);
             break;
         case 9:
             mainController(clientes, validosClientes, consumos, validosConsumos);

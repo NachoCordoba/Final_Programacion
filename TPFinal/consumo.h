@@ -63,4 +63,5 @@ int getLastIdConsumo(stConsumo consumos[], int validos);
 
 int validateNewConsumo(stConsumo consumos[], int validos, stConsumo consumo);
 
+int addRandomConsumo(stConsumo consumos[], int validos, int id);
 #endif

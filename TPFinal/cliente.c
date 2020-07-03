@@ -1,6 +1,7 @@
 #include "cliente.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 #define MAX_SIZE 30
 #define FILE_NAME "clientes.dat"
 
@@ -300,4 +301,9 @@ int validateNewClient(stCliente clientes[], int validos, stCliente cliente){
         i++;
     }
     return flag;
+}
+
+int getRandomClient(stCliente clientes[], int validos){
+    int r = rand() % validos;
+    return clientes[r].id;
 }

@@ -1,6 +1,7 @@
 #include "consumo.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 #define FILE_NAME "consumos.dat"
 
 /**
@@ -69,7 +70,7 @@ stConsumo getParamsConsumo(){
 void viewConsumo(stConsumo consumo){
     printf("\n // ------- Consumo ID: %d -------// \n", consumo.id);
     printf(" - ID Cliente: %d \n", consumo.idCliente);
-    printf(" - Fecha: %d-%d-%d \n", consumo.dia, consumo.mes, consumo.anio);
+    printf(" - Fecha: %02d-%02d-%d \n", consumo.dia, consumo.mes, consumo.anio);
     printf(" - Datos Consumidos: %d \n", consumo.datosConsumidos);
     printf(" - Baja: %d \n", consumo.baja);
     printf("//------------------------------// \n");
@@ -253,5 +254,17 @@ int validateNewConsumo(stConsumo consumos[], int validos, stConsumo consumo){
         i++;
     }*/
     return flag;
+}
+
+int addRandomConsumo(stConsumo consumos[], int validos, int id){
+    time_t t = time(NULL);
+    struct tm tm = *localtime(&t);
+    int r = rand() % 999;
+
+    stConsumo consumo = createConsumo(id, tm.tm_year, tm.tm_mon, tm.tm_mday, r);
+
+    viewConsumo(consumo);
+
+    return addConsumo(consumos, validos, consumo);
 }
 

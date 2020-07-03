@@ -71,5 +71,7 @@ int getLastId(stCliente clientes[], int validos);
 
 int validateNewClient(stCliente clientes[], int validos, stCliente cliente);
 
+int getRandomClient(stCliente clientes[], int validos);
+
 
 #endif
