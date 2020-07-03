@@ -245,7 +245,7 @@ stCliente * findClientByDNI(stCliente clientes[], int validos, int dni){
     return clienteResponse;
 }
 
-void saveOnFile(stCliente clientes[], int validos){
+void saveOnFileClientes(stCliente clientes[], int validos){
     int i = 0;
     FILE * file;
     file = fopen(FILE_NAME, "wb");
@@ -258,7 +258,7 @@ void saveOnFile(stCliente clientes[], int validos){
     fclose(file);
 }
 
-int loadFromFile(stCliente clientes[]){
+int loadFromFileClientes(stCliente clientes[]){
     int validos = 0;
     FILE * file;
     if((file = fopen(FILE_NAME, "rb"))!= NULL){

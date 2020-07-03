@@ -63,9 +63,9 @@ stCliente * findClientByApellido(stCliente clientes[], int validos, char apellid
 
 stCliente * findClientByDNI(stCliente clientes[], int validos, int dni);
 
-void saveOnFile(stCliente clientes[], int validos);
+void saveOnFileClientes(stCliente clientes[], int validos);
 
-int loadFromFile(stCliente clientes[]);
+int loadFromFileClientes(stCliente clientes[]);
 
 
 
